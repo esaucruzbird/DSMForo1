@@ -17,7 +17,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+//import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +28,8 @@ import androidx.compose.ui.Modifier
 //import androidx.compose.ui.text.input.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import com.example.dsmforocompose.data.AppRepository
 import java.util.Locale
 import kotlin.math.abs
@@ -52,6 +54,7 @@ fun GradesScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(24.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -177,6 +180,12 @@ fun GradesScreen(
                 resultText = "Promedio: ${formatDecimal(average)}"
                 statusText = if (passed) "El estudiante aprobó." else "El estudiante reprobó."
                 feedbackText = "Registro guardado en el archivo de notas."
+
+                subject = ""
+                for (i in 0 until 5) {
+                    noteStates[i].value = ""
+                    weightStates[i] = "20"
+                }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
